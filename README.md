@@ -46,8 +46,8 @@ This is a boilerplate project for building a Node.js application using Express.j
 4. **Run the application:**
     ```bash
     # DEV
-    npm run start:dev
-    yarn start:dev
+    npm run start dev
+    yarn start dev
 
     #PROD
     npm run start
