@@ -2,10 +2,6 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/global');
 
 class JwtAuth {
-    constructor() {
-        this.config = config;
-    }
-
     /**
      * Authenticate a request using a JWT token
      * @param {*} req 
@@ -21,8 +17,8 @@ class JwtAuth {
         }
         const token = authheader.split(' ')[1];
         try {
-            const userData = jwt.verify(token, this.config.get('/jwt').secret,{
-                issuer: this.config.get('/jwt').issuer,
+            const userData = jwt.verify(token, config.get('/jwt').secret,{
+                issuer: config.get('/jwt').issuer,
                 algorithms: ['HS256'],
             });
             req.user = userData;
@@ -45,6 +41,5 @@ class JwtAuth {
         });
     }
 }
-
-exports.JwtAuth = JwtAuth;
+module.exports = JwtAuth;
 

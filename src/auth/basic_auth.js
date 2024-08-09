@@ -3,10 +3,6 @@ const JwtAuth = require('./jwt_auth');
 const jwtAuth = new JwtAuth();
 
 class BasicAuth {
-    constructor(){
-        this.config = config;
-    }
-
     /**
      * Authenticate a request using basic auth
      * @param {*} req 
@@ -14,7 +10,7 @@ class BasicAuth {
      * @param {*} next 
      */
     authenticate(req, res, next){
-        const basicUser = this.config.get('/basic');
+        const basicUser = config.get('/basic');
         const authheader = req.headers.authorization;
         if(!authheader){
             res.status(401).send('No authorization header');
@@ -33,5 +29,4 @@ class BasicAuth {
         return res.status(401).send('Invalid credentials');
     }
 }
-
-exports.BasicAuth = BasicAuth;
+module.exports = BasicAuth;
