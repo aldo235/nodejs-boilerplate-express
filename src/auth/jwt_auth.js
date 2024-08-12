@@ -9,7 +9,7 @@ class JwtAuth {
      * @param {*} next 
      * @returns 
      */
-    authenticate(req, res, next) {
+    authenticate = (req, res, next) => {
         const authheader = req.headers.authorization;
         if (!authheader) {
             res.status(401).send('No authorization header');
@@ -33,7 +33,7 @@ class JwtAuth {
      * @param {*} user 
      * @returns 
      */
-    generateToken(user) {
+    generateToken = (user) => {
         return jwt.sign(user, this.config.get('/jwt').secret, {
             issuer: this.config.get('/jwt').issuer,
             algorithm: 'HS256',

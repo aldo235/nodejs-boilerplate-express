@@ -9,7 +9,7 @@ class BasicAuth {
      * @param {*} res 
      * @param {*} next 
      */
-    authenticate(req, res, next){
+    authenticate = (req, res, next) => {
         const basicUser = config.get('/basic');
         const authheader = req.headers.authorization;
         if(!authheader){

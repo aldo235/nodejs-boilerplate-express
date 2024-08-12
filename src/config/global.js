@@ -9,6 +9,11 @@ const config = {
     jwt: {
         secret: process.env.JWT_SECRET,
         issuer: process.env.JWT_ISSUER
+    },
+    database: {
+        mongodb: {
+            url: process.env.MONGODB_URL
+        }
     }
 }
 
