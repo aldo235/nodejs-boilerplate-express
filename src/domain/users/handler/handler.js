@@ -2,7 +2,8 @@ const joi = require('joi');
 const config = require('../../../config/global');
 const UserValidator = require('../../../validation/validator/UserValidator');
 const userValidator = new UserValidator()
-const { CreateUser } = require('../../../application/user/use-cases');
+const UserUseCase = require('../../../applications/user/use-cases/user-usecase');
+const ResponseWrapper = require('../../../utils/wrapper')
 const UserRepositoryMongoDB = require('../../../infrastructure/persistence/mongodb/UserRepositoryMongoDB');
 const DatabaseMongodb = require('../../../infrastructure/services/MongoDB');
 class UserHandler {
@@ -10,25 +11,35 @@ class UserHandler {
     constructor() {
         const database = new DatabaseMongodb(config.get('/database').mongodb.url);
         const userRepository = new UserRepositoryMongoDB(database);
-        this.createUser = new CreateUser(userRepository);
+        this.userUseCase = new UserUseCase(userRepository);
+        this.responseWrapper = new ResponseWrapper();
     }
 
     handleLogin = async (req, res) => {
-        const { error } = userValidator.validateLoginUser(req.body)
-        if (error) {
-            return res.status(400).json({ error: error.details[0].message });
+        try {
+            const { error } = userValidator.validateLoginUser(req.body)
+            if (error) {
+                return this.responseWrapper.error(res, {}, error.details[0].message, 400);
+            }
+            const user = await this.userUseCase.loginUser(req.body);
+            return this.responseWrapper.success(res, user, 'Login Success', 200);
+        } catch (error) {
+            return this.responseWrapper.error(res, {}, error.message, 400);
         }
-        return res.status(200).json({ message: 'Login success' });
+        
     }
 
     handleRegister = async (req, res) => {
-        const { error } = userValidator.validateRegisterUser(req.body)
-        if (error) {
-            return res.status(400).json({ error: error.details[0].message });
-        }
-        console.log(this, 'this.createUser')
-        const user = await this.createUser.execute(req.body);
-        return res.status(200).json({ message: 'Register success', user });
+       try {
+            const { error } = userValidator.validateRegisterUser(req.body)
+            if (error) {
+                return this.responseWrapper.error(res, {}, error.details[0].message, 400);
+            }
+            const user = await this.userUseCase.createUser(req.body);
+            return this.responseWrapper.success(res, user, 'User has been created', 201);
+       } catch (error) {
+            return this.responseWrapper.error(res, {}, error.message, 400);
+       }
     }
 }
 

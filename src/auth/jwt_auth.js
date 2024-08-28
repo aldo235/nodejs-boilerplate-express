@@ -34,8 +34,8 @@ class JwtAuth {
      * @returns 
      */
     generateToken = (user) => {
-        return jwt.sign(user, this.config.get('/jwt').secret, {
-            issuer: this.config.get('/jwt').issuer,
+        return jwt.sign(user, config.get('/jwt').secret, {
+            issuer: config.get('/jwt').issuer,
             algorithm: 'HS256',
             expiresIn: '24h'
         });

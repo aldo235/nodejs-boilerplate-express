@@ -20,6 +20,25 @@ class UserRepositoryMongoDB {
             throw error;
         }
     }
+
+    findByEmail = async (email) => {
+        try {
+            const connection = await this.db.connect();
+            const result = await connection.getCollection('users').findOne({ email });
+            if (!result) {
+                return null;
+            }
+            return new User(
+                result._id,
+                result.name,
+                result.email,
+                result.password,
+                result.createdAt
+            );
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = UserRepositoryMongoDB;

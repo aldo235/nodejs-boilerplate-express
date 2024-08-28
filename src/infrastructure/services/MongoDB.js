@@ -12,7 +12,8 @@ class DatabaseMongodb {
           const uri = this.url;
           this.client = new MongoClient(uri, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            maxPoolSize: 10
           });
     
           await this.client.connect();

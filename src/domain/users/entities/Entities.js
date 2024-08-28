@@ -9,6 +9,11 @@ class Entities {
         return this._id
     }
 
+    setId = (id) => {
+        this._id = id;
+        return this;
+    }
+
     getCreatedAt = () => {
         return this._createdAt
     }

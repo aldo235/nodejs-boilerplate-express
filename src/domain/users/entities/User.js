@@ -42,6 +42,15 @@ class User extends Entities {
             return false;
         }
     }
+
+    responseUser = () => {
+        return {
+            id: this._id,
+            name: this._name,
+            email: this._email,
+            createdAt: this._createdAt
+        }
+    }
 }
 
 module.exports = User
