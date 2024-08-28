@@ -41,6 +41,16 @@ class UserHandler {
             return this.responseWrapper.error(res, {}, error.message, 400);
        }
     }
+
+    handleMe = async (req, res) => {
+        try {
+            const userData = req.user;
+            const user = await this.userUseCase.getUser(userData.id);
+            return this.responseWrapper.success(res, user, 'Success', 200);
+        } catch (error) {
+            return this.responseWrapper.error(res, {}, error.message, 400);
+        }
+    }
 }
 
 module.exports = UserHandler;

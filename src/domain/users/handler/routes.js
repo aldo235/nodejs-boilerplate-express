@@ -9,6 +9,6 @@ const userHandler = new UserHandler();
 
 router.post('/v1/login', basicAuth.authenticate, userHandler.handleLogin);
 router.post('/v1/register', basicAuth.authenticate, userHandler.handleRegister);
-router.get('/v1/me', jwtAuth.authenticate);
+router.get('/v1/me', jwtAuth.authenticate, userHandler.handleMe);
 
 module.exports = router;

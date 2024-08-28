@@ -1,3 +1,5 @@
+const {ObjectId} = require('mongodb')
+
 const User = require('../../../domain/users/entities/User');
 
 class UserRepositoryMongoDB {
@@ -33,6 +35,24 @@ class UserRepositoryMongoDB {
                 result.name,
                 result.email,
                 result.password,
+                result.createdAt
+            );
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    findById = async (id) => {
+        try {
+            const connection = await this.db.connect();
+            const result = await connection.getCollection('users').findOne({ _id: ObjectId.createFromHexString(id) });
+            if (!result) {
+                return null;
+            }
+            return new User(
+                result._id,
+                result.name,
+                result.email,
                 result.createdAt
             );
         } catch (error) {
