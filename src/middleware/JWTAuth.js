@@ -28,18 +28,6 @@ class JwtAuth {
             return res.status(401).send('Invalid token');
         }
     }
-    /**
-     * Generate a JWT token for a user
-     * @param {*} user 
-     * @returns 
-     */
-    generateToken = (user) => {
-        return jwt.sign(user, config.get('/jwt').secret, {
-            issuer: config.get('/jwt').issuer,
-            algorithm: 'HS256',
-            expiresIn: '24h'
-        });
-    }
 }
 module.exports = JwtAuth;
 

@@ -1,5 +1,5 @@
 const config = require('../config/global');
-const JwtAuth = require('./jwt_auth');
+const JwtAuth = require('./JWTAuth');
 const jwtAuth = new JwtAuth();
 
 class BasicAuth {

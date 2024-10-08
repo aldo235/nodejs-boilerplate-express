@@ -1,4 +1,4 @@
-const AppServer = require('./src/server');
+const AppServer = require('./src/index');
 const appServer = new AppServer();
 const ctx = 'app-serve';
 
