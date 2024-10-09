@@ -58,7 +58,7 @@ This is a boilerplate project for building a Node.js application using Express.j
 1. **Build Docker:**
     ```bash
     docker build -t boilerplate:latest . 
-    ``
+    ```
 2. **Set up environment variables:**
     - Create a .env file in the root of the project.
     - Add the following variables:
