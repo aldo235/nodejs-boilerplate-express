@@ -15,7 +15,6 @@ class DatabaseMongodb {
             if (poolExist) {
                 this.client = poolExist.client;
                 this.db = this.client.db();
-                console.log('Connected to MongoDB from pool');
                 return this;
             }
             this.client = new MongoClient(uri, {

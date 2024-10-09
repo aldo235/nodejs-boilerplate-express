@@ -1,4 +1,4 @@
-# Node.js Express Boilerplate
+# Node.js Express Boilerplate (DDD Architecture)
 
 This is a boilerplate project for building a Node.js application using Express.js. It provides a solid foundation with a structured directory layout, commonly used middlewares, microservice architecture, and some best practices for building scalable applications.
 
@@ -12,8 +12,8 @@ This is a boilerplate project for building a Node.js application using Express.j
 - **Helmet**: Helps secure Express apps by setting various HTTP headers
 - **CORS**: Cross-Origin Resource Sharing middleware
 - **JWT**: Authentication Method with Json Web Token
-- **MYSQL**: Database MYSQL for storing data
-- **REDIS**: Caching Data for fast response
+- **MongoDB**: Database MongoDB for storing data
+- **Docker**: Docker for containerized
 
 ## Prerequisites
 
@@ -53,3 +53,23 @@ This is a boilerplate project for building a Node.js application using Express.j
     npm run start
     yarn start
     ```
+
+## Docker
+1. **Build Docker:**
+    ```bash
+    docker build -t boilerplate:latest . 
+    ``
+2. **Set up environment variables:**
+    - Create a .env file in the root of the project.
+    - Add the following variables:
+    ```bash
+    PORT=
+    BASIC_AUTH_USERNAME=
+    BASIC_AUTH_PASSWORD=
+    JWT_SECRET=
+    JWT_ISSUER=
+    ```
+3. **Run Docker:**
+    ```bash
+    docker run --env-file __LOCATION_ENV__ --name boilerplate -d --publish 8080:8080 boilerplate:latest
+    ``
